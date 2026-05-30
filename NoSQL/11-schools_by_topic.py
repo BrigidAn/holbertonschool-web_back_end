@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
-"""Module that changes all topics of a school document based on name"""
+"""Module that returns list of schools having a specific topic"""
 
 
-def update_topics(mongo_collection, name, topics):
-    """Changes all topics of a school document based on the name.
+def schools_by_topic(mongo_collection, topic):
+    """Returns the list of schools having a specific topic.
 
     Args:
         mongo_collection: pymongo collection object
-        name (string): school name to update
-        topics (list of strings): list of topics for the school
+        topic (string): topic searched
+
+    Returns:
+        List of schools with the given topic
     """
-    mongo_collection.update_many(
-        {"name": name},
-        {"$set": {"topics": topics}}
-    )
+    return list(mongo_collection.find({"topics": topic}))
